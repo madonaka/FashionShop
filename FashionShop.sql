@@ -11,7 +11,7 @@ create table shop_userinfo(
 );
 -- 관리자정보
 create table shop_admin(
-    adminnum varchar(10) primary key,
+    adminnum number primary key,
     userid varchar(8),
     authority number,
     rank varchar(10),
@@ -66,7 +66,7 @@ create table shop_cart(
 );
 --장바구니정보상세
 create table shop_cartitem(
-	cartitmenum varchar(8),
+	cartitmenum number,
 	cartnum varchar(8),
 	productnum varchar(8),
     foreign key(cartnum) references shop_cart(cartnum),
@@ -74,13 +74,18 @@ create table shop_cartitem(
 );
 --문의
 create table shop_inquiry(
-	inquirynum varchar(8) primary key,
+	inquirynum number primary key,
 	userid varchar(8),
-	adminnum varchar(10),
+	adminnum number,
 	content varchar(1000),
 	inquirydate date,
 	answer varchar(1000),
 	answerdate date,
     foreign key(userid) references shop_userinfo(userid),
     foreign key(adminnum) references shop_admin(adminnum)
-)
+);
+
+insert into shop_userinfo(userid, username, password, address, phone, email, joindate) values('test1', '테스터1', '1234', '주소테스트','01012341234', 'test1@email.com',sysdate);
+insert into shop_userinfo(userid, username, password, address, phone, email, joindate) values('test2', '테스터2', '1234', '주소테스트','01012341235', 'test2@email.com',sysdate);
+
+commit;
